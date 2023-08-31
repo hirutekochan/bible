@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+
+  #content {
+    text-align: center;
+    padding: 10px;
+  }
+
+  #text {
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  #buttons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+<body>
+
+<div id="content">
+  <p id="no"></p>
+  <p id="text"></p>
+</div>
+
+<div id="buttons">
+  <button id="prev" disabled>Prev.</button>
+  <button id="all">All</button>
+  <button id="next">Next</button>
+</div>
+
+<script>
+  const textArray = [ 
+
+
+
+      "御旨の奥義を、自らあらかじめ定められた計画に従って、わたしたちに示して下さったのである。",
+      "ほむべきかな、わたしたちの主イエス・キリストの父なる神。神はキリストにあって、天上で霊のもろもろの祝福をもって、わたしたちを祝福し、",
+      "また、神の力強い活動によって働く力が、わたしたち信じる者にとっていかに絶大なものであるかを、あなたがたが知るに至るように、と祈っている。",
+      "しかるに、あわれみに富む神は、わたしたちを愛して下さったその大きな愛をもって、 罪過によって死んでいたわたしたちを、キリストと共に生かし-あなたがたの救われたのは、恵みによるのである-",
+      "ところが、あなたがたは、このように以前は遠く離れていたが、今ではキリスト・イエスにあって、キリストの血によって近いものとなったのである。",
+      "どうか、わたしたちのうちに働く力によって、わたしたちが求めまた思うところのいっさいを、はるかに越えてかなえて下さるかたに、",
+      "そして彼は、ある人を使徒とし、ある人を預言者とし、ある人を伝道者とし、ある人を牧師、教師として、お立てになった。",
+      "すなわち、あなたがたは、以前の生活に属する、情欲に迷って滅び行く古き人を脱ぎ捨て、 心の深みまで新たにされて、 真の義と聖とをそなえた神にかたどって造られた新しき人を着るべきである。",
+      "そこで、あなたがたの歩きかたによく注意して、賢くない者のようにではなく、賢い者のように歩き、 今の時を生かして用いなさい。",
+      "夫たる者よ。キリストが教会を愛してそのためにご自身をささげられたように、妻を愛しなさい。",
+      "主人たる者よ。僕たちに対して、同様にしなさい。おどすことを、してはならない。あなたがたが知っているとおり、彼らとあなたがたとの主は天にいますのであり、かつ人をかたより見ることをなさらないのである。",
+      "最後に言う。主にあって、その偉大な力によって、強くなりなさい。 悪魔の策略に対抗して立ちうるために、神の武具で身を固めなさい。",
+      "その上に、信仰のたてを手に取りなさい。それをもって、悪しき者の放つ火の矢を消すことができるであろう。",
+      "あなたがたの救われたのは、実に、恵みにより、信仰によるのである。それは、あなたがた自身から出たものではなく、神の賜物である。"
+    ];
+
+  let index = 0;
+  let displayFullText = false;
+
+  const noElement = document.getElementById("no");
+  const textElement = document.getElementById("text");
+  const prevButton = document.getElementById("prev");
+  const allButton = document.getElementById("all");
+  const nextButton = document.getElementById("next");
+
+  function updateText() {
+    noElement.textContent = `No. ${index + 1}`;
+    textElement.textContent = displayFullText ? textArray[index] : textArray[index].split(/[。、]/)[0];
+    prevButton.disabled = index === 0;
+    nextButton.disabled = index === textArray.length - 1;
+  }
+
+  prevButton.addEventListener("click", () => {
+    if (index > 0) {
+      index--;
+      displayFullText = false;
+      updateText();
+    }
+  });
+
+  allButton.addEventListener("click", () => {
+    displayFullText = !displayFullText;
+    updateText();
+  });
+
+  nextButton.addEventListener("click", () => {
+    if (index < textArray.length - 1) {
+      index++;
+      displayFullText = false;
+      updateText();
+    }
+  });
+
+  updateText();
+</script>
+
+</body>
+</html>
