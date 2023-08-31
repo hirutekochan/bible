@@ -12,6 +12,7 @@
   #content {
     text-align: center;
     padding: 10px;
+    font-size: 40px;
   }
 
   #text {
@@ -91,7 +92,7 @@
   const nextButton = document.getElementById("next");
 
   function updateText() {
-    noElement.textContent = `No. ${index + 1}`;
+    noElement.textContent = `${index + 1}課`;
     textElement.textContent = displayFullText ? textArray[index] : textArray[index].split(/[。、]/)[0];
     prevButton.disabled = index === 0;
     nextButton.disabled = index === textArray.length - 1;
